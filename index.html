@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6c63ff" />
+
+  <!-- SEO -->
+  <title>اختبارات الشخصية – ما نوع شخصيتك؟</title>
+  <meta name="description" content="اكتشف نوع شخصيتك من خلال اختبار تفاعلي احترافي. تعرف على نقاط قوتك وضعفك والوظائف المناسبة لك." />
+  <meta name="keywords" content="اختبار شخصية, نوع الشخصية, تحليل الشخصية, MBTI عربي" />
+  <meta name="author" content="اختبارات الشخصية" />
+  <meta property="og:title" content="اختبارات الشخصية – ما نوع شخصيتك؟" />
+  <meta property="og:description" content="اكتشف نوع شخصيتك من خلال اختبار تفاعلي احترافي." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="light-mode">
+
+  <!-- شاشة التحميل -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-logo">
+        <i class="fas fa-brain"></i>
+      </div>
+      <div class="loading-bar-wrapper">
+        <div class="loading-bar-fill" id="loading-bar"></div>
+      </div>
+      <p class="loading-text">جاري التحميل...</p>
+    </div>
+  </div>
+
+  <!-- الهيدر -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <i class="fas fa-brain logo-icon"></i>
+        <span>شخصيتك</span>
+      </div>
+      <div class="header-actions">
+        <button id="sound-toggle" class="icon-btn" title="تشغيل / إيقاف الصوت" aria-label="الصوت">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="theme-toggle" class="icon-btn" title="الوضع الليلي / النهاري" aria-label="السمة">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- التطبيق الرئيسي -->
+  <main id="app">
+
+    <!-- ===== الصفحة الرئيسية ===== -->
+    <section id="home-section" class="section active">
+      <div class="hero-container">
+        <div class="hero-badge">اختبار مجاني</div>
+        <div class="hero-icon-wrapper">
+          <i class="fas fa-brain hero-brain"></i>
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring delay-1"></div>
+        </div>
+        <h1 class="hero-title">ما نوع <span class="gradient-text">شخصيتك؟</span></h1>
+        <p class="hero-subtitle">
+          اكتشف شخصيتك الحقيقية من خلال اختبار علمي تفاعلي مصمم خصيصاً لك.
+          تعرّف على نقاط قوتك، وضعفك، والمسار المهني الأنسب لك.
+        </p>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-num">5</span>
+            <span class="stat-label">شخصيات</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">15</span>
+            <span class="stat-label">سؤال</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">5</span>
+            <span class="stat-label">دقائق</span>
+          </div>
+        </div>
+
+        <button id="start-btn" class="btn btn-primary btn-large">
+          <i class="fas fa-play-circle"></i>
+          ابدأ الاختبار الآن
+        </button>
+
+        <div class="personality-preview">
+          <p class="preview-label">اكتشف إذا كنت...</p>
+          <div class="personality-tags">
+            <span class="p-tag" style="--c:#6c63ff">🦁 القائد</span>
+            <span class="p-tag" style="--c:#f59e0b">🎨 المبدع</span>
+            <span class="p-tag" style="--c:#10b981">🔬 المحلل</span>
+            <span class="p-tag" style="--c:#ef4444">🤝 الاجتماعي</span>
+            <span class="p-tag" style="--c:#3b82f6">📋 المنظم</span>
+          </div>
+        </div>
+
+        <!-- آخر نتيجة محفوظة -->
+        <div id="saved-result-banner" class="saved-result-banner hidden">
+          <i class="fas fa-history"></i>
+          <span id="saved-result-text">لديك نتيجة محفوظة</span>
+          <button id="view-saved-btn" class="btn btn-secondary btn-sm">عرض النتيجة</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== قسم الأسئلة ===== -->
+    <section id="quiz-section" class="section">
+      <div class="quiz-container">
+
+        <!-- شريط التقدم -->
+        <div class="progress-wrapper">
+          <div class="progress-info">
+            <span class="progress-label">التقدم</span>
+            <span id="progress-fraction" class="progress-fraction">1 / 15</span>
+          </div>
+          <div class="progress-bar-track">
+            <div id="progress-bar" class="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- رقم السؤال -->
+        <div class="question-counter">
+          <span id="q-number" class="q-number">السؤال <b>1</b></span>
+          <div class="q-category-badge" id="q-category"></div>
+        </div>
+
+        <!-- بطاقة السؤال -->
+        <div id="question-card" class="question-card glass-card">
+          <div class="question-icon" id="q-icon"></div>
+          <h2 id="question-text" class="question-text"></h2>
+
+          <div id="options-container" class="options-container"></div>
+        </div>
+
+        <!-- أزرار التنقل -->
+        <div class="quiz-nav">
+          <button id="prev-btn" class="btn btn-ghost" disabled>
+            <i class="fas fa-arrow-right"></i>
+            السابق
+          </button>
+          <button id="next-btn" class="btn btn-primary" disabled>
+            التالي
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== صفحة النتائج ===== -->
+    <section id="result-section" class="section">
+      <div class="result-container">
+
+        <!-- رأس النتيجة -->
+        <div class="result-header">
+          <div class="result-emoji" id="result-emoji"></div>
+          <div class="result-type-badge" id="result-type-badge"></div>
+          <h1 id="result-title" class="result-title"></h1>
+          <p id="result-subtitle" class="result-subtitle"></p>
+        </div>
+
+        <!-- مقياس النقاط -->
+        <div class="scores-section glass-card">
+          <h3><i class="fas fa-chart-bar"></i> توزيع نقاطك</h3>
+          <div id="scores-chart" class="scores-chart"></div>
+        </div>
+
+        <!-- الوصف المفصل -->
+        <div class="result-details glass-card">
+          <h3><i class="fas fa-user-circle"></i> وصف شخصيتك</h3>
+          <p id="result-description" class="result-description"></p>
+        </div>
+
+        <!-- القوة والضعف -->
+        <div class="strengths-weaknesses-grid">
+          <div class="sw-card glass-card strengths-card">
+            <h3><i class="fas fa-star"></i> نقاط القوة</h3>
+            <ul id="result-strengths" class="sw-list"></ul>
+          </div>
+          <div class="sw-card glass-card weaknesses-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> نقاط الضعف</h3>
+            <ul id="result-weaknesses" class="sw-list"></ul>
+          </div>
+        </div>
+
+        <!-- أفضل الوظائف -->
+        <div class="careers-section glass-card">
+          <h3><i class="fas fa-briefcase"></i> الوظائف المناسبة لك</h3>
+          <div id="result-careers" class="careers-grid"></div>
+        </div>
+
+        <!-- أزرار المشاركة وإعادة الاختبار -->
+        <div class="result-actions">
+          <button id="restart-btn" class="btn btn-primary btn-large">
+            <i class="fas fa-redo"></i>
+            إعادة الاختبار
+          </button>
+          <button id="share-btn" class="btn btn-secondary btn-large">
+            <i class="fas fa-share-alt"></i>
+            مشاركة النتيجة
+          </button>
+          <button id="copy-link-btn" class="btn btn-ghost btn-large">
+            <i class="fas fa-link"></i>
+            نسخ الرابط
+          </button>
+        </div>
+
+        <!-- مقارنة الشخصيات -->
+        <div class="compare-section glass-card">
+          <h3><i class="fas fa-exchange-alt"></i> الشخصيات الأخرى</h3>
+          <p class="compare-desc">تعرف على الشخصيات الأخرى وكيف تختلف عن شخصيتك</p>
+          <div id="other-personalities" class="other-personalities-grid"></div>
+        </div>
+
+        <!-- إحصائيات الاختبارات السابقة -->
+        <div id="history-section" class="history-section glass-card hidden">
+          <h3><i class="fas fa-history"></i> اختباراتك السابقة</h3>
+          <div id="history-list" class="history-list"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- فوتر -->
+  <footer class="site-footer">
+    <p>صُنع بـ <i class="fas fa-heart" style="color:#ef4444"></i> لاكتشاف شخصيتك</p>
+  </footer>
+
+  <!-- مودال المشاركة -->
+  <div id="share-modal" class="modal-overlay hidden">
+    <div class="modal glass-card">
+      <button class="modal-close" id="close-modal"><i class="fas fa-times"></i></button>
+      <h3><i class="fas fa-share-alt"></i> شارك نتيجتك</h3>
+      <p id="share-text-preview" class="share-text-preview"></p>
+      <div class="share-buttons">
+        <a id="share-whatsapp" href="#" target="_blank" class="share-btn whatsapp-btn">
+          <i class="fab fa-whatsapp"></i> واتساب
+        </a>
+        <a id="share-twitter" href="#" target="_blank" class="share-btn twitter-btn">
+          <i class="fab fa-x-twitter"></i> تويتر
+        </a>
+        <a id="share-telegram" href="#" target="_blank" class="share-btn telegram-btn">
+          <i class="fab fa-telegram"></i> تيليجرام
+        </a>
+      </div>
+      <button id="copy-text-btn" class="btn btn-ghost" style="width:100%;margin-top:0.8rem">
+        <i class="fas fa-copy"></i> نسخ النص
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast الإشعارات -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
